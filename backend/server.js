@@ -4,17 +4,14 @@ import authRoutes from './routes/auth.routes.js'
 import connectionToMongoDB from './db/dbConnection.js';
 
 const app = express();
-app.use(express.json());
-
-
 dotenv.config();
+app.use(express.json());
 const PORT = process.env.PORT || 5000;
 
 
-
-app.get('/', (req, res)=>{
-    res.send('This is working as a new version')
-})
+// app.get('/', (req, res)=>{
+//     res.send('This is working as a new version')
+// })
 
 app.use('/api/auth', authRoutes);
 
