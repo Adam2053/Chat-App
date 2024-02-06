@@ -8,11 +8,12 @@ import cookieParser from 'cookie-parser';
 // import cors from 'cors'
 
 const app = express();
-dotenv.config();
+dotenv.config({path:"../.env"});
 app.use(express.json());
 // app.use(cors())
 app.use(cookieParser())
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT ;
+console.log(process.env.PORT)
 
 
 // app.get('/', (req, res)=>{
@@ -23,7 +24,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/users', userRoutes);
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
     connectionToMongoDB();
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${process.env.PORT}`);
 })
