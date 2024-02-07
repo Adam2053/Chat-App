@@ -6,24 +6,29 @@ import messageRoutes from './routes/message.routes.js';
 import userRoutes from './routes/user.routes.js';
 import cookieParser from 'cookie-parser';
 import { app, server } from './socket/socket.js';
+import path from 'path';
 // import cors from 'cors'
 
+const __dirname = path.resolve();
 
-dotenv.config({path:"../.env"});
+dotenv.config();
 app.use(express.json());
 // app.use(cors())
 app.use(cookieParser())
-// const PORT = process.env.PORT ;
-console.log(process.env.PORT)
 
 
-// app.get('/', (req, res)=>{
-//     res.send('This is working as a new version')
-// })
+
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/users', userRoutes);
+
+app.use(express.static(path.join(__dirname, '/frontend/dist')));
+
+app.get('*', (req,res)=>{
+    res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+})
 
 server.listen(process.env.PORT, () => {
     connectionToMongoDB();
