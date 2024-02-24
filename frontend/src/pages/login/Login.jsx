@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import useLogin from '../../hooks/useLogin';
 import bg from '../../assets/socialmedia07.jpg'
-import './login.css';
+
 
 const Login = () => {
     const [username, setUsername] = useState("");
